@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>小狗的心心收集游戏 - 心心商店版</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom right, #ffd2dc, #fff3f6);
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            text-align: center;
+            padding: 50px;
+            color: #d6336c;
+        }
+        h1 {
+            font-size: 28px;
+        }
+        #heart {
+            font-size: 40px;
+            cursor: pointer;
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        #counter, #level {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        .footer {
+            margin-top: 40px;
+            font-size: 16px;
+            color: #aa336a;
+        }
+        .pets {
+            margin-top: 30px;
+        }
+        .pets img {
+            width: 90px;
+            margin: 0 15px;
+            border-radius: 20px;
+        }
+        .shop {
+            margin-top: 40px;
+        }
+        .shop h2 {
+            color: #d6336c;
+            margin-bottom: 10px;
+        }
+        .item {
+            display: inline-block;
+            background: #fff0f5;
+            border: 2px solid #ff99bb;
+            border-radius: 12px;
+            padding: 10px;
+            margin: 10px;
+            width: 120px;
+        }
+        .item img {
+            width: 60px;
+            height: 60px;
+        }
+        .item button {
+            margin-top: 8px;
+            background: #ffb6c1;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>🐾 小狗的心心收集游戏 🐾</h1>
+    <p>点击下面的爱心，收集哥哥的爱 💗 每 10 个心心升一级！</p>
+    <div id="heart">💗</div>
+    <div id="counter">你收集到了 0 颗心心</div>
+    <div id="level">当前等级：Level 1</div>
+
+    <div class="pets">
+        <img src="https://cdn.pixabay.com/photo/2022/07/04/19/34/cat-7301251_1280.png" alt="小猫">
+        <img src="https://cdn.pixabay.com/photo/2021/12/23/05/42/dog-6890051_1280.png" alt="小狗">
+    </div>
+
+    <div class="shop">
+        <h2>🛍️ 心心商店</h2>
+        <div class="item">
+            <img src="https://cdn-icons-png.flaticon.com/512/812/812827.png" alt="蝴蝶结">
+            <p>蝴蝶结</p>
+            <button onclick="buyItem(10)">花10心心买</button>
+        </div>
+        <div class="item">
+            <img src="https://cdn-icons-png.flaticon.com/512/4033/4033727.png" alt="小裙子">
+            <p>小裙子</p>
+            <button onclick="buyItem(20)">花20心心买</button>
+        </div>
+        <div class="item">
+            <img src="https://cdn-icons-png.flaticon.com/512/3534/3534094.png" alt="贴纸包">
+            <p>贴纸包</p>
+            <button onclick="buyItem(15)">花15心心买</button>
+        </div>
+    </div>
+
+    <audio autoplay loop>
+        <source src="https://cdn.pixabay.com/audio/2023/03/26/audio_d5e2f4e54d.mp3" type="audio/mpeg">
+        你的浏览器不支持音频播放。
+    </audio>
+
+    <div class="footer">由 Rex 为 Cub 独家设计 ✨</div>
+
+    <script>
+        let count = 0;
+        let level = 1;
+        const counter = document.getElementById("counter");
+        const levelDisplay = document.getElementById("level");
+
+        document.getElementById("heart").onclick = function () {
+            count++;
+            counter.textContent = "你收集到了 " + count + " 颗心心";
+            let newLevel = Math.floor(count / 10) + 1;
+            if (newLevel !== level) {
+                level = newLevel;
+                levelDisplay.textContent = "当前等级：Level " + level;
+            }
+        }
+
+        function buyItem(cost) {
+            if (count >= cost) {
+                count -= cost;
+                alert("购买成功！哥哥送你的~");
+                counter.textContent = "你收集到了 " + count + " 颗心心";
+                let newLevel = Math.floor(count / 10) + 1;
+                if (newLevel !== level) {
+                    level = newLevel;
+                    levelDisplay.textContent = "当前等级：Level " + level;
+                }
+            } else {
+                alert("心心不够哦～多点点爱心再来买吧！");
+            }
+        }
+    </script>
+</body>
+</html>
